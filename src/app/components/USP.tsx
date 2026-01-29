@@ -90,45 +90,39 @@ export const USP = () => {
         {/* Comparison Container */}
         <div className="relative bg-zinc-900/30 rounded-2xl md:rounded-3xl border border-white/10 overflow-hidden backdrop-blur-sm scale-[0.9] md:scale-100 origin-top md:origin-center">
             
-            {/* Winner Glow Effect Background for the 3rd Column */}
-            <div className="absolute top-0 bottom-0 right-0 w-1/3 bg-gradient-to-b from-[#FF7C2B]/10 to-transparent pointer-events-none hidden md:block border-l border-[#FF7C2B]/20" />
-
             {/* Table Header */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 p-4 md:p-6 border-b border-white/10 text-[10px] md:text-sm font-normal uppercase">
-                <div className="hidden md:block md:col-span-3 text-gray-500 pl-4">Criteria</div>
-                <div className="hidden md:block md:col-span-4 text-center text-gray-500">Traditional / Hybrid</div>
-                <div className="hidden md:block md:col-span-5 text-center text-[#FF7C2B] font-semibold">AI STUDIO 48</div>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-0 p-0 border-b border-white/10 text-[10px] md:text-sm font-normal uppercase">
+                <div className="hidden md:block md:col-span-3 py-6 pl-10 text-gray-500">Criteria</div>
+                <div className="hidden md:block md:col-span-4 py-6 text-center text-gray-500 border-l border-white/5">Traditional / Hybrid</div>
+                <div className="hidden md:block md:col-span-5 py-6 text-center text-[#FF7C2B] font-semibold border-l border-[#FF7C2B]/20 bg-gradient-to-b from-[#FF7C2B]/10 to-transparent">AI STUDIO 48</div>
                 
                 {/* Mobile Header */}
-                <div className="md:hidden text-center text-gray-500">Comparison</div>
+                <div className="md:hidden text-center text-gray-500 py-4">Comparison</div>
             </div>
 
             {/* Table Rows */}
             <div className="divide-y divide-white/5">
                 {comparisonData.map((item, index) => (
-                    <div key={index} className="grid grid-cols-1 md:grid-cols-12 relative transition-colors duration-300">
+                    <div key={index} className="grid grid-cols-1 md:grid-cols-12 relative transition-colors duration-300 overflow-hidden">
                         
                         {/* Column 1: Criteria */}
-                        <div className="p-3 md:p-6 md:col-span-3 flex items-center gap-3 text-gray-400 font-medium md:border-r md:border-white/5">
-                            <div className="p-1.5 md:p-2 bg-zinc-800 rounded-lg text-gray-300 transition-colors">
+                        <div className="p-4 md:p-8 md:col-span-3 flex items-center gap-4 text-gray-400 font-medium">
+                            <div className="p-2 bg-zinc-800 rounded-lg text-gray-300">
                                 {item.icon}
                             </div>
-                            <span className="text-sm md:text-base">{item.label}</span>
+                            <span className="text-base md:text-lg">{item.label}</span>
                         </div>
 
                         {/* Column 2: Others */}
-                        <div className="p-3 md:p-6 md:col-span-4 flex flex-col justify-center items-center text-center bg-transparent transition-opacity">
-                            <div className="flex items-center gap-2 mb-0.5 md:mb-1 text-gray-300">
+                        <div className="p-4 md:p-8 md:col-span-4 flex flex-col justify-center items-center text-center bg-transparent transition-opacity border-l border-white/5">
+                            <div className="flex items-center gap-2 mb-1 text-gray-300">
                                 <span className="text-lg font-normal leading-[1.5]">{item.traditional.text}</span>
                             </div>
                             <span className="text-lg text-gray-500 leading-[1.5]">{item.traditional.subtext}</span>
                         </div>
 
                         {/* Column 3: AI Studio 48 (Winner) */}
-                        <div className="p-3 md:p-6 md:col-span-5 flex flex-col justify-center items-center text-center relative overflow-hidden">
-                            {/* Mobile-only highlight bg */}
-                            <div className="absolute inset-0 bg-[#FF7C2B]/5 md:hidden pointer-events-none" />
-                            
+                        <div className="p-4 md:p-8 md:col-span-5 flex flex-col justify-center items-center text-center relative border-l border-[#FF7C2B]/20 bg-[#FF7C2B]/5">
                             <div className="relative z-10">
                                 <div className="flex items-center justify-center gap-2 mb-0.5 md:mb-1 text-white">
                                     <div className="bg-[#FF7C2B] rounded-full p-0.5">
