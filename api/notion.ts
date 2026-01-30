@@ -1,10 +1,5 @@
 import { Client } from '@notionhq/client';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import dotenv from 'dotenv';
-import path from 'path';
-
-// 명시적으로 .env.local 로드
-dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 
 export default async function handler(
   request: VercelRequest,
