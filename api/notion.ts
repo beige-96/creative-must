@@ -64,8 +64,7 @@ export default async function handler(
   } catch (error: any) {
     console.error('Notion API Error:', error);
     return response.status(500).json({ 
-      error: error.message || 'Failed to submit to Notion',
-      details: error.body || error.message || 'No additional details'
+      error: error.message || 'Failed to submit to Notion'
     });
   }
 }
