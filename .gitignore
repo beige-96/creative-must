@@ -38,3 +38,4 @@ dist-ssr/
 
 # Vite specific
 *.pnpm-debug.log*
+.vercel

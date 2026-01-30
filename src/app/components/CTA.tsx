@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { motion } from 'motion/react';
@@ -15,12 +15,28 @@ export const CTA = () => {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    console.log(data);
-    toast.success("신청이 완료되었습니다! 24시간 내로 연락드리겠습니다.");
-    reset();
-    setIsSubmitting(false);
+    
+    try {
+      const response = await fetch('/api/notion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit to Notion');
+      }
+
+      toast.success("신청이 완료되었습니다! 24시간 내로 연락드리겠습니다.");
+      reset();
+    } catch (error) {
+      console.error('Submission failed:', error);
+      toast.error("전송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
