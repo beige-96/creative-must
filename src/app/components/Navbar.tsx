@@ -5,10 +5,19 @@ import { motion, AnimatePresence } from 'motion/react';
 export const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <div className="font-extrabold text-2xl tracking-tighter text-white">AI STUDIO 48</div>
+      <div className="max-w-7xl mx-auto px-6 h-[70px] flex items-center justify-between">
+        <div 
+          className="cursor-pointer flex items-center"
+          onClick={scrollToTop}
+        >
+          <img src="/main_logo.png" alt="AI STUDIO 48" className="w-[160px] h-auto object-contain" />
+        </div>
         
         <div className="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-400">
           <a href="#portfolio" className="hover:text-white transition-colors">Portfolio</a>
