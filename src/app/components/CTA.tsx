@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 import { AlertCircle } from 'lucide-react';
 
 interface FormData {
+  name: string;
   company: string;
   url: string;
   contact: string;
@@ -68,14 +69,25 @@ export const CTA = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label className="block text-base md:text-lg font-normal text-gray-300 mb-2 leading-[1.5]">업체명 (담당자명)</label>
+                        <label className="block text-base md:text-lg font-normal text-gray-300 mb-2 leading-[1.5]">업체명 (브랜드명)</label>
                         <input 
-                            {...register("company", { required: "업체명과 담당자명을 입력해주세요." })}
+                            {...register("company", { required: "업체명을 입력해주세요." })}
                             type="text" 
-                            placeholder="주식회사 AI STUDIO (홍길동)"
+                            placeholder="주식회사 AI STUDIO"
                             className="w-full px-4 py-3 rounded-xl bg-black border border-white/10 text-white focus:border-[#FF7C2B] focus:ring-1 focus:ring-[#FF7C2B] outline-none transition-all placeholder:text-gray-700 text-[16px] md:text-base"
                         />
                         {errors.company && <span className="text-red-500 text-sm mt-1">{errors.company.message}</span>}
+                    </div>
+
+                    <div>
+                        <label className="block text-base md:text-lg font-normal text-gray-300 mb-2 leading-[1.5]">담당자 성함</label>
+                        <input 
+                            {...register("name", { required: "성함을 입력해주세요." })}
+                            type="text" 
+                            placeholder="홍길동"
+                            className="w-full px-4 py-3 rounded-xl bg-black border border-white/10 text-white focus:border-[#FF7C2B] focus:ring-1 focus:ring-[#FF7C2B] outline-none transition-all placeholder:text-gray-700 text-[16px] md:text-base"
+                        />
+                        {errors.name && <span className="text-red-500 text-sm mt-1">{errors.name.message}</span>}
                     </div>
 
                     <div>

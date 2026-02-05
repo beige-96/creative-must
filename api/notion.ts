@@ -10,7 +10,7 @@ export default async function handler(
   }
 
   try {
-    const { name, company, url, contact, email, purpose } = request.body;
+    const { name, company, url, contact, email, purpose, otherPurpose } = request.body;
     const NOTION_TOKEN = process.env.NOTION_TOKEN;
     const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
@@ -27,12 +27,12 @@ export default async function handler(
     await notion.pages.create({
       parent: { database_id: DATABASE_ID },
       properties: {
-        // '이름' 컬럼 (Title)
+        // '이름' 컬럼 (Title) - 담당자 성함
         이름: {
           title: [
             {
               text: {
-                content: name,
+                content: name || '',
               },
             },
           ],
@@ -42,7 +42,7 @@ export default async function handler(
           rich_text: [
             {
               text: {
-                content: company,
+                content: company || '',
               },
             },
           ],
@@ -53,23 +53,27 @@ export default async function handler(
         },
         // '연락처' 컬럼 (Phone Number)
         연락처: {
-          phone_number: contact,
+          phone_number: contact || '',
         },
         // '이메일' 컬럼 (Email)
         이메일: {
-          email: email,
+          email: email || '',
         },
-        // '사용목적' 컬럼 (Multi-select)
-        사용목적: {
+        // '제작 목적' 컬럼 (Multi-select)
+        '제작 목적': {
           multi_select: (purpose || []).map((item: string) => ({
             name: item,
           })),
         },
-        // '요청일시' 컬럼 (Date)
-        요청일시: {
-          date: {
-            start: new Date().toISOString(),
-          },
+        // '기타 상세' 컬럼 (Rich Text)
+        '기타 상세': {
+          rich_text: [
+            {
+              text: {
+                content: otherPurpose || '',
+              },
+            },
+          ],
         },
       },
     });
