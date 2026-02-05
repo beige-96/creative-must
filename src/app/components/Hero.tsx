@@ -51,34 +51,82 @@ export const Hero = () => {
     offset: ["start start", "end end"]
   });
 
-  const ANIMATION_END = 1.0; 
-
-  // Main Video: Shrinks continuously
-  const mainScale = useTransform(scrollYProgress, [0, ANIMATION_END], [1, 0.4]); 
-  const mainRadius = useTransform(scrollYProgress, [0, ANIMATION_END], ["0px", "24px"]);
+  // Main Video Animation Timing
+  const mainScale = useTransform(scrollYProgress, [0, 0.8], [1, 0.4]); 
+  const mainRadius = useTransform(scrollYProgress, [0, 0.8], ["0px", "24px"]);
   
-  // CTA Button: Fades in only at the very end
-  const buttonOpacity = useTransform(scrollYProgress, [0.95, 1.0], [0, 1]);
-  const buttonY = useTransform(scrollYProgress, [0.95, 1.0], [50, 0]);
+  // Dynamic Dim Overlay Opacity
+  const dimOpacity = useTransform(
+    scrollYProgress, 
+    [0, 0.15, 0.75, 0.85, 1.0], 
+    [0.5, 0, 0, 0.5, 0.5]
+  );
+
+  // First Text: Fades out earlier
+  const firstTextOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
+  const firstTextY = useTransform(scrollYProgress, [0, 0.12], [0, -100]);
+
+  // Second Text: Fades in earlier to give button more time
+  const secondTextOpacity = useTransform(scrollYProgress, [0.75, 0.82], [0, 1]);
+  const secondTextY = useTransform(scrollYProgress, [0.75, 0.82], [20, 0]);
+
+  // CTA Button: Fades in at 0.82 and STAYS until 1.0
+  const buttonOpacity = useTransform(scrollYProgress, [0.82, 0.88], [0, 1]);
+  const buttonY = useTransform(scrollYProgress, [0.82, 0.88], [30, 0]);
+
+  // Section Exit: Significantly delayed to keep button clickable
+  // Fades out only in the very last 5% of the scroll
+  const sectionScale = useTransform(scrollYProgress, [0.95, 1.0], [1, 0.9]);
+  const sectionOpacity = useTransform(scrollYProgress, [0.95, 1.0], [1, 0]);
+  const sectionBlur = useTransform(scrollYProgress, [0.95, 1.0], ["0px", "10px"]);
 
   return (
     <motion.div 
         ref={containerRef} 
-        // 400vh for fast, overlapped sequencing
+        // Increased to 400vh to provide a "hold" area at the end
         className="relative w-full h-[400vh] bg-black"
-        style={{ position: 'relative' }} 
+        style={{ 
+            scale: sectionScale, 
+            opacity: sectionOpacity,
+            filter: sectionBlur,
+            willChange: "transform, opacity, filter"
+        }} 
     >
       
       {/* Sticky Viewport */}
       <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center">
         
+        {/* Dynamic Dim Layer - z-index higher than cards (z-10) but lower than text (z-30) */}
+        <motion.div 
+            style={{ opacity: dimOpacity }}
+            className="absolute inset-0 bg-black z-20 pointer-events-none"
+        />
+
+        {/* First Intro Text */}
+        <motion.div 
+            style={{ opacity: firstTextOpacity, y: firstTextY }}
+            className="absolute z-30 text-center px-6 pointer-events-none"
+        >
+            <h1 
+                className="text-[32px] md:text-[64px] font-[800] leading-[1.3] text-white mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] whitespace-nowrap"
+            >
+                영상 제작의 시대가 바뀝니다.<br />
+                1/10의 비용, 10배 빠른 속도
+            </h1>
+            <p 
+                className="text-[18px] md:text-[20px] font-[400] leading-[1.5] text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]"
+            >
+                고가의 장비와 인력 없이 AI로 구현하는 압도적 영상 퀄리티
+            </p>
+        </motion.div>
+
         {/* Main Background Video */}
         <motion.div 
             style={{ 
                 scale: mainScale, 
                 borderRadius: mainRadius,
             }}
-            className="relative z-0 w-full h-full overflow-hidden shadow-2xl origin-center will-change-transform"
+            className="relative z-0 w-full h-full overflow-hidden shadow-2xl origin-center will-change-transform bg-black"
         >
             <div className="relative w-full h-full overflow-hidden pointer-events-none">
                 <iframe 
@@ -105,16 +153,35 @@ export const Hero = () => {
             ))}
         </div>
 
+        {/* Second Intro Text (Before Button) */}
+        <motion.div 
+            style={{ opacity: secondTextOpacity, y: secondTextY }}
+            className="absolute z-30 text-center px-6 w-full max-w-5xl pointer-events-none mb-32"
+        >
+            <h2 
+                className="text-[32px] md:text-[64px] font-[800] leading-[1.3] text-white mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
+            >
+                낮은 퀄리티와 비싼 견적,<br />
+                그 실망을 확신으로 바꿉니다.
+            </h2>
+            <p 
+                className="text-[18px] md:text-[20px] font-[400] leading-[1.5] text-white/90 max-w-3xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]"
+            >
+                AI STUDIO48은 기술을 넘어 영상의 본질과 압도적 효율을 증명합니다.<br className="hidden md:block" />
+                가치를 아는 창의적인 브랜드와 함께, 영상 제작의 기준을 다시 씁니다.
+            </p>
+        </motion.div>
+
         {/* CTA Button */}
         <motion.div 
             style={{ opacity: buttonOpacity, y: buttonY }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 w-full flex justify-center px-4 pointer-events-auto"
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 w-full flex justify-center px-4 pointer-events-auto"
         >
             <a 
             href="#apply"
-            className="flex items-center gap-2 bg-[#FF7C2B] text-white text-xl font-semibold leading-[1.5] px-8 py-4 rounded-full hover:bg-[#E0651A] hover:scale-105 transition-all shadow-xl shadow-orange-900/50"
+            className="flex items-center gap-2 bg-[#FF7C2B] text-white text-[18px] md:text-xl font-semibold leading-[1.5] px-8 py-4 rounded-full hover:bg-[#E0651A] hover:scale-105 transition-all shadow-xl shadow-orange-900/50"
             >
-            선착순 100팀 무료 제작 신청
+            협업 진행하러 가기
             <ArrowRight className="w-5 h-5" />
             </a>
         </motion.div>
