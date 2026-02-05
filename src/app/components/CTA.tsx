@@ -12,11 +12,19 @@ interface FormData {
   email: string;
   purpose: string[];
   otherPurpose?: string;
+  isAdEntry?: boolean;
 }
 
 export const CTA = () => {
-  const { register, handleSubmit, formState: { errors }, reset, watch } = useForm<FormData>();
+  const { register, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm<FormData>();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('ad') === 'true') {
+      setValue('isAdEntry', true);
+    }
+  }, [setValue]);
 
   const selectedPurposes = watch("purpose") || [];
   const showOtherInput = selectedPurposes.includes("기타");

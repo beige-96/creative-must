@@ -10,7 +10,7 @@ export default async function handler(
   }
 
   try {
-    const { name, company, url, contact, email, purpose, otherPurpose } = request.body;
+    const { name, company, url, contact, email, purpose, otherPurpose, isAdEntry } = request.body;
     const NOTION_TOKEN = process.env.NOTION_TOKEN;
     const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
@@ -74,6 +74,10 @@ export default async function handler(
               },
             },
           ],
+        },
+        // '광고유입여부' 컬럼 (Checkbox)
+        '광고유입여부': {
+          checkbox: !!isAdEntry,
         },
       },
     });
