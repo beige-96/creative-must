@@ -15,7 +15,7 @@ export default async function handler(
   }
 
   try {
-    const { name, contact, company } = request.body;
+    const { name, company, url, contact, email, purpose } = request.body;
     const NOTION_TOKEN = process.env.NOTION_TOKEN;
     const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
@@ -42,10 +42,6 @@ export default async function handler(
             },
           ],
         },
-        // '연락처' 컬럼 (Phone Number)
-        연락처: {
-          phone_number: contact,
-        },
         // '브랜드 혹은 회사명' 컬럼 (Rich Text)
         '브랜드 혹은 회사명': {
           rich_text: [
@@ -55,6 +51,24 @@ export default async function handler(
               },
             },
           ],
+        },
+        // 'URL' 컬럼 (URL)
+        URL: {
+          url: url || null,
+        },
+        // '연락처' 컬럼 (Phone Number)
+        연락처: {
+          phone_number: contact,
+        },
+        // '이메일' 컬럼 (Email)
+        이메일: {
+          email: email,
+        },
+        // '사용목적' 컬럼 (Multi-select)
+        사용목적: {
+          multi_select: (purpose || []).map((item: string) => ({
+            name: item,
+          })),
         },
         // '요청일시' 컬럼 (Date)
         요청일시: {
