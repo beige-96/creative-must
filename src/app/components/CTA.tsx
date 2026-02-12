@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { motion } from 'motion/react';
-import { AlertCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { AlertCircle, ChevronDown } from 'lucide-react';
 
 interface FormData {
   company: string;
@@ -11,11 +11,13 @@ interface FormData {
   email: string;
   purpose: string[];
   otherPurpose?: string;
+  privacyAgreement: boolean;
 }
 
 export const CTA = () => {
   const { register, handleSubmit, formState: { errors }, reset, watch } = useForm<FormData>();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [showPrivacyDetails, setShowPrivacyDetails] = React.useState(false);
 
   const selectedPurposes = watch("purpose") || [];
   const showOtherInput = selectedPurposes.includes("기타");
@@ -163,6 +165,66 @@ export const CTA = () => {
                         모든 업체와 함께할 순 없습니다. <br className="sm:hidden" />
                         AI 효율을 극대화할 수 있는 브랜드만 선별하여 진행합니다.
                     </p>
+                </div>
+
+                <div className="rounded-xl bg-zinc-800/50 border border-white/5 text-[14px] text-gray-400 overflow-hidden transition-all">
+                    <div className="flex items-center justify-between p-4 gap-3 group">
+                        <label className="flex items-center space-x-3 cursor-pointer">
+                            <div className="relative flex items-center justify-center">
+                                <input 
+                                    {...register("privacyAgreement", { required: "개인정보 수집 및 이용에 동의해주세요." })}
+                                    type="checkbox" 
+                                    className="peer appearance-none w-5 h-5 rounded-md bg-black border border-white/10 checked:bg-[#FF7C2B] checked:border-[#FF7C2B] transition-all cursor-pointer"
+                                />
+                                <div className="absolute opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity">
+                                    <svg width="12" height="8" viewBox="0 0 14 10" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M1 5L5 9L13 1" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <span className="text-gray-200 font-semibold group-hover:text-[#FF7C2B] transition-colors">개인정보 수집 및 이용에 동의합니다. (필수)</span>
+                        </label>
+                        
+                        <button 
+                            type="button"
+                            onClick={() => setShowPrivacyDetails(!showPrivacyDetails)}
+                            className="p-1 hover:bg-white/5 rounded-full transition-colors cursor-pointer"
+                        >
+                            <motion.div
+                                animate={{ rotate: showPrivacyDetails ? 180 : 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <ChevronDown size={20} className="text-gray-500" />
+                            </motion.div>
+                        </button>
+                    </div>
+                    
+                    <AnimatePresence>
+                        {showPrivacyDetails && (
+                            <motion.div 
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="overflow-hidden bg-black/20"
+                            >
+                                <div className="p-4 pt-0 space-y-4 leading-relaxed border-t border-white/5 mt-0">
+                                    <p className="font-bold text-gray-300 mt-4">개인정보 수집 및 이용에 대한 상세 안내</p>
+                                    <div className="space-y-1">
+                                        <p>1. 수집 목적: 신규 마케팅 서비스 홍보, 뉴스레터 발송</p>
+                                        <p>2. 수집 항목: 성함, 이메일, 연락처</p>
+                                        <p>3. 보유 및 이용 기간: 보유기간 2년, 마케팅 동의 철회 시까지</p>
+                                        <p>4. 서비스 제공을 위한 위탁: 회사는 원활한 서비스 제공을 위해 아래와 같이 개인정보 처리 업무를 위탁하고 있습니다.</p>
+                                        <p>5. 수탁자: (주)머스트인게이지 / 위탁업무 : 신규 마케팅 서비스 홍보</p>
+                                    </div>
+                                    <p className="text-gray-500 italic">
+                                        “귀하는 위와 같은 개인정보 수집 및 이용에 거부할 권리가 있습니다. 본 동의는 선택 사항이며, 거부 시에도 서비스 이용은 가능하나 뉴스레터 및 이벤트 혜택 안내 등 일부 서비스 제공이제한될 수 있습니다.”
+                                    </p>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                    {errors.privacyAgreement && <div className="px-4 pb-4"><span className="text-red-500 text-sm">{errors.privacyAgreement.message}</span></div>}
                 </div>
 
                 <button 

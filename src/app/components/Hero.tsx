@@ -2,39 +2,35 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 
-// Video IDs & Layout Configuration
+// Video Sources & Layout Configuration
 const CARD_VIDEOS = [
   // 1. Top Left Start
-  // Duration: 0.35
   { 
-    id: "Zo_sCr3fXcg", 
+    src: "/2025 APEC l AI 프로모션 영상_02.mp4", 
     initialX: "-150vw", 
     initialY: "-100vh",
     start: 0.0,
     end: 0.35
   },
   // 2. Top Right Start
-  // Starts when #1 is at 45% (0.16)
   { 
-    id: "sg-n6nxuGro", 
+    src: "/2025 APEC l AI 프로모션 영상_07.mp4", 
     initialX: "150vw", 
     initialY: "-100vh",
     start: 0.16,
     end: 0.51
   },
   // 3. Bottom Right Start
-  // Starts when #2 is at 45% progress relative to its duration (0.16 + 0.16 = 0.32)
   { 
-    id: "J0XqiR-8gck", 
+    src: "/2025 APEC l AI 프로모션 영상_08.mp4", 
     initialX: "150vw", 
     initialY: "100vh",
     start: 0.32,
     end: 0.67
   },
   // 4. Bottom Left Start
-  // Starts when #3 is at 45% progress relative to its duration (0.32 + 0.16 = 0.48)
   { 
-    id: "ldhdsX7zFNE", 
+    src: "/BMW 4K_01.mp4", 
     initialX: "-150vw", 
     initialY: "100vh",
     start: 0.48,
@@ -129,24 +125,24 @@ export const Hero = () => {
             className="relative z-0 w-full h-full overflow-hidden shadow-2xl origin-center will-change-transform bg-black"
         >
             <div className="relative w-full h-full overflow-hidden pointer-events-none">
-                <iframe 
-                    // Use wide width on mobile to cover 9:16 screen with 16:9 video
+                <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
                     className="absolute top-1/2 left-1/2 w-[320%] sm:w-[150vw] h-full sm:h-[150vh] -translate-x-1/2 -translate-y-1/2 object-cover"
-                    src="https://www.youtube.com/embed/dfGCYs-gF1o?autoplay=1&mute=1&loop=1&playlist=dfGCYs-gF1o&controls=0&rel=0&showinfo=0&iv_load_policy=3&modestbranding=1&disablekb=1" 
-                    title="Main Showreel" 
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen
-                />
+                >
+                    <source src="/260211_Master_.mp4" type="video/mp4" />
+                </video>
                 <div className="absolute inset-0 bg-black/10" />
             </div>
         </motion.div>
 
         {/* Floating Cards - Animated Entrance to Center */}
         <div className="absolute inset-0 z-10 pointer-events-none">
-            {CARD_VIDEOS.map((card) => (
+            {CARD_VIDEOS.map((card, index) => (
                 <FloatingCard 
-                    key={card.id} 
+                    key={index} 
                     card={card} 
                     scrollYProgress={scrollYProgress}
                 />
@@ -212,17 +208,15 @@ const FloatingCard = ({ card, scrollYProgress }: { card: any, scrollYProgress: a
             className="absolute top-1/2 left-1/2 w-[85%] sm:w-[50%] aspect-[9/16] sm:aspect-video rounded-2xl sm:rounded-xl overflow-hidden shadow-2xl block pointer-events-auto bg-black will-change-transform"
         >
             <div className="relative w-full h-full">
-                <iframe 
-                    width="100%" 
-                    height="100%" 
-                    src={`https://www.youtube.com/embed/${card.id}?autoplay=1&mute=1&loop=1&playlist=${card.id}&controls=0&rel=0&showinfo=0&iv_load_policy=3&modestbranding=1`}
-                    title="Floating Video"
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    // Fill the container height and scale width to cover the aspect ratio (9:16 container vs 16:9 video)
-                    // Mobile: wide width centered to cover. Desktop: normal fit.
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320%] sm:w-full h-full sm:h-full object-cover pointer-events-none sm:scale-[1.1]" 
-                />
+                <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320%] sm:w-full h-full sm:h-full object-cover pointer-events-none sm:scale-[1.1]"
+                >
+                    <source src={card.src} type="video/mp4" />
+                </video>
                 <div className="absolute inset-0 bg-transparent z-10" />
             </div>
         </motion.div>
