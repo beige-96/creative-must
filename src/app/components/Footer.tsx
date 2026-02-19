@@ -9,9 +9,22 @@ export const Footer = () => {
           <p>© 2026 AI STUDIO 48. All rights reserved.</p>
         </div>
         <div className="flex space-x-6">
-          <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-          <a href="#" className="hover:text-white transition-colors">Instagram</a>
+          <a 
+            href="https://www.youtube.com/@AiStudio48" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hover:text-white transition-colors"
+          >
+            YouTube
+          </a>
+          <a 
+            href="https://www.instagram.com/ai_studio48/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hover:text-white transition-colors"
+          >
+            Instagram
+          </a>
         </div>
       </div>
     </footer>
