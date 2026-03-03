@@ -1,12 +1,25 @@
 import React from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useTranslation } from 'react-i18next';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
 
 export const Navbar = () => {
+  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = React.useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
   };
 
   return (
@@ -20,16 +33,65 @@ export const Navbar = () => {
         </div>
         
         <div className="hidden md:flex items-center space-x-8 text-base font-normal text-gray-400">
-          <a href="#features" className="hover:text-white transition-colors">Features</a>
-          <a href="#portfolio" className="hover:text-white transition-colors">Portfolio</a>
+          <a href="#features" className="hover:text-white transition-colors">{t('navbar.features')}</a>
+          <a href="#portfolio" className="hover:text-white transition-colors">{t('navbar.portfolio')}</a>
+          
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white hover:bg-transparent">
+                <Globe className="h-5 w-5" />
+                <span className="sr-only">Toggle language</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-black border-white/10 text-white">
+              <DropdownMenuItem onClick={() => changeLanguage('ko')} className="hover:bg-white/10 cursor-pointer">
+                한국어
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => changeLanguage('en')} className="hover:bg-white/10 cursor-pointer">
+                English
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => changeLanguage('zh')} className="hover:bg-white/10 cursor-pointer">
+                中文
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => changeLanguage('ja')} className="hover:bg-white/10 cursor-pointer">
+                日本語
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <a href="#apply" className="bg-[#FF7C2B] text-white px-6 py-2.5 rounded-full hover:bg-[#E0651A] transition-colors font-semibold shadow-md shadow-orange-900/20">
-            협업 진행하러 가기
+            {t('navbar.apply')}
           </a>
         </div>
 
-        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X className="text-white" /> : <Menu className="text-white" />}
-        </button>
+        <div className="md:hidden flex items-center gap-4">
+            <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white hover:bg-transparent">
+                <Globe className="h-5 w-5" />
+                <span className="sr-only">Toggle language</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="bg-black border-white/10 text-white">
+              <DropdownMenuItem onClick={() => changeLanguage('ko')} className="hover:bg-white/10 cursor-pointer">
+                한국어
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => changeLanguage('en')} className="hover:bg-white/10 cursor-pointer">
+                English
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => changeLanguage('zh')} className="hover:bg-white/10 cursor-pointer">
+                中文
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => changeLanguage('ja')} className="hover:bg-white/10 cursor-pointer">
+                日本語
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+            <button onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X className="text-white" /> : <Menu className="text-white" />}
+            </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -41,9 +103,9 @@ export const Navbar = () => {
             className="md:hidden bg-black border-b border-white/10 overflow-hidden"
           >
             <div className="flex flex-col p-6 space-y-4 font-normal text-base text-gray-400">
-              <a href="#features" onClick={() => setIsOpen(false)} className="hover:text-white">Features</a>
-              <a href="#portfolio" onClick={() => setIsOpen(false)} className="hover:text-white">Portfolio</a>
-              <a href="#apply" onClick={() => setIsOpen(false)} className="text-[#FF7C2B] font-semibold">협업 진행하러 가기</a>
+              <a href="#features" onClick={() => setIsOpen(false)} className="hover:text-white">{t('navbar.features')}</a>
+              <a href="#portfolio" onClick={() => setIsOpen(false)} className="hover:text-white">{t('navbar.portfolio')}</a>
+              <a href="#apply" onClick={() => setIsOpen(false)} className="text-[#FF7C2B] font-semibold">{t('navbar.apply')}</a>
             </div>
           </motion.div>
         )}

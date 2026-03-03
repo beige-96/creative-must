@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, animate } from 'motion/react';
 import { Plus, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const PORTFOLIO_ITEMS = [
   { id: "pxnqUffbFW0", title: "Creating a better world | MSQ Global" },
@@ -14,6 +15,7 @@ const PORTFOLIO_ITEMS = [
 ];
 
 export const Portfolio = () => {
+  const { t } = useTranslation();
   const [width, setWidth] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
@@ -97,13 +99,13 @@ export const Portfolio = () => {
         <div className="max-w-7xl mx-auto px-6 mb-12">
             <div className="max-w-3xl">
                 <h2 className="text-2xl md:text-5xl font-extrabold text-white mb-3 md:mb-4 leading-[1.3]">
-                이 모든 작품은<br /> <span className="text-[#FF7C2B]">100% AI로</span> 제작되었습니다.
+                {t('portfolio.title1')}<br /> <span className="text-[#FF7C2B]">{t('portfolio.title2')}</span>{t('portfolio.title3')}
                 </h2>
                 <p className="text-[18px] md:text-xl font-normal text-gray-400 mb-8 leading-[1.5]">
-                브랜드의 가치를 높이는 시네마틱 광고부터 실무 숏폼까지
+                {t('portfolio.description')}
                 </p>
                 <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-white/80 text-xl font-normal leading-[1.5] backdrop-blur-sm border border-white/5">
-                Portfolio
+                {t('portfolio.badge')}
                 </span>
             </div>
         </div>

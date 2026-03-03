@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 // Video Sources & Layout Configuration
 const CARD_VIDEOS = [
@@ -39,6 +40,7 @@ const CARD_VIDEOS = [
 ];
 
 export const Hero = () => {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   
   // Track scroll progress relative to this section
@@ -106,13 +108,13 @@ export const Hero = () => {
             <h1 
                 className="text-[32px] md:text-[64px] font-[800] leading-[1.3] text-white mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] whitespace-nowrap"
             >
-                영상 제작의 시대가 바뀝니다.<br />
-                1/10의 비용, 10배 빠른 속도
+                {t('hero.title1')}<br />
+                {t('hero.title2')}
             </h1>
             <p 
                 className="text-[18px] md:text-[20px] font-[400] leading-[1.5] text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]"
             >
-                고가의 장비와 인력 없이 AI로 구현하는 압도적 영상 퀄리티
+                {t('hero.subtitle1')}
             </p>
         </motion.div>
 
@@ -157,14 +159,14 @@ export const Hero = () => {
             <h2 
                 className="text-[32px] md:text-[64px] font-[800] leading-[1.3] text-white mb-6 drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
             >
-                낮은 퀄리티와 비싼 견적,<br />
-                그 실망을 확신으로 바꿉니다.
+                {t('hero.title3')}<br />
+                {t('hero.title4')}
             </h2>
             <p 
                 className="text-[18px] md:text-[20px] font-[400] leading-[1.5] text-white/90 max-w-3xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]"
             >
-                AI STUDIO48은 기술을 넘어 영상의 본질과 압도적 효율을 증명합니다.<br className="hidden md:block" />
-                가치를 아는 창의적인 브랜드와 함께, 영상 제작의 기준을 다시 씁니다.
+                {t('hero.subtitle2')}<br className="hidden md:block" />
+                {t('hero.subtitle3')}
             </p>
         </motion.div>
 
@@ -177,7 +179,7 @@ export const Hero = () => {
             href="#apply"
             className="flex items-center gap-2 bg-[#FF7C2B] text-white text-[18px] md:text-xl font-semibold leading-[1.5] px-8 py-4 rounded-full hover:bg-[#E0651A] hover:scale-105 transition-all shadow-xl shadow-orange-900/50"
             >
-            협업 진행하러 가기
+            {t('hero.cta')}
             <ArrowRight className="w-5 h-5" />
             </a>
         </motion.div>

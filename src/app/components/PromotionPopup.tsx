@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Gift, Users } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export const PromotionPopup = () => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [showCount, setShowCount] = useState(false); // Design ready, hidden for now
 
@@ -69,12 +71,12 @@ export const PromotionPopup = () => {
                 </div>
 
                 <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-4 leading-tight">
-                    [선착순 프로모션]<br />
-                    AI 영상 100개 헌정 제작 이벤트
+                    {t('promotion.title')}<br />
+                    {t('promotion.subtitle')}
                 </h2>
                 
                 <p className="text-lg text-gray-400 mb-8 leading-relaxed">
-                    귀사의 서비스를 15초의 상상의 세계로<br />안내해 드립니다.
+                    {t('promotion.description1')}<br />{t('promotion.description2')}
                 </p>
 
                 {/* Status Counting (Conditional Visibility) */}
@@ -82,7 +84,7 @@ export const PromotionPopup = () => {
                     <div className="bg-black/40 rounded-2xl p-4 mb-8 border border-white/5 flex items-center justify-center gap-3">
                         <Users className="w-5 h-5 text-[#FF7C2B]" />
                         <span className="text-white font-medium">
-                            현재 <span className="text-[#FF7C2B]">74개</span> 신청 완료 / 남은 수량 <span className="text-[#FF7C2B]">26개</span>
+                            {t('promotion.count_message_1')} <span className="text-[#FF7C2B]">74{t('promotion.count_unit')}</span> {t('promotion.count_message_2')} / {t('promotion.count_message_3')} <span className="text-[#FF7C2B]">26{t('promotion.count_unit')}</span>
                         </span>
                     </div>
                 )}
@@ -91,14 +93,14 @@ export const PromotionPopup = () => {
                     onClick={handleJoin}
                     className="w-full py-4 bg-[#FF7C2B] text-white text-xl font-bold rounded-2xl hover:bg-[#E0651A] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-orange-900/40 cursor-pointer"
                 >
-                    이벤트 참여하기
+                    {t('promotion.join_button')}
                 </button>
                 
                 <button 
                     onClick={handleClose}
                     className="mt-6 text-sm text-gray-500 hover:text-gray-300 transition-colors underline underline-offset-4 cursor-pointer"
                 >
-                    나중에 확인하기
+                    {t('promotion.later_button')}
                 </button>
             </div>
           </motion.div>

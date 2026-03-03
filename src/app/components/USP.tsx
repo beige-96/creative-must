@@ -1,8 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Check } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export const USP = () => {
+  const { t } = useTranslation();
   const containerRef = useRef<HTMLElement>(null);
   const [elementTop, setElementTop] = useState(0);
   const [clientHeight, setClientHeight] = useState(0);
@@ -52,19 +54,19 @@ export const USP = () => {
 
   const comparisonData = [
     {
-      label: "제작 기간",
-      traditional: "평균 4주 (기획+촬영+편집)",
-      us: "단 한 주 내외"
+      label: t('usp.row1_label'),
+      traditional: t('usp.row1_traditional'),
+      us: t('usp.row1_us')
     },
     {
-      label: "제작 비용",
-      traditional: "수천만 원 (인건비/장비/장소)",
-      us: "기존 대비 70% 이상 절감"
+      label: t('usp.row2_label'),
+      traditional: t('usp.row2_traditional'),
+      us: t('usp.row2_us')
     },
     {
-      label: "수정 작업",
-      traditional: "추가 비용 및 일정 지연 발생",
-      us: "AI 실시간 피드백 및 즉각 수정"
+      label: t('usp.row3_label'),
+      traditional: t('usp.row3_traditional'),
+      us: t('usp.row3_us')
     }
   ];
 
@@ -81,13 +83,12 @@ export const USP = () => {
         >
         <div className="text-left mb-8 md:mb-16">
             <h2 className="text-2xl md:text-5xl font-extrabold mb-3 md:mb-4 leading-[1.3]">
-                아직도 한 달을 기다리십니까?<br/>
-                우리는 <span className="text-[#FF7C2B]">한 주</span>면 충분합니다.
+                {t('usp.title1')}<br/>
+                {t('usp.title2')}<span className="text-[#FF7C2B]">{t('usp.title3')}</span>{t('usp.title4')}
             </h2>
             <p className="text-[18px] md:text-xl font-normal text-gray-400 leading-[1.6] max-w-4xl">
-                <span className="text-[#FF7C2B]">글로벌 인프라, 독보적 기술, 베테랑의 감각</span>. 
-                공정의 거품은 걷어내고,<br className="hidden md:block" />
-                오직 영상의 본질만 남깁니다.
+                <span className="text-[#FF7C2B]">{t('usp.description1')}</span>{t('usp.description2')}<br className="hidden md:block" />
+                {t('usp.description3')}
             </p>
         </div>
 
@@ -103,7 +104,7 @@ export const USP = () => {
                 {/* Graph Header */}
                 <div className="text-center mb-10">
                     <span className="text-xl md:text-2xl font-semibold text-[#99a1af]">
-                        촬영비용
+                        {t('usp.cost_title')}
                     </span>
                 </div>
 
@@ -112,8 +113,8 @@ export const USP = () => {
                     
                     {/* Traditional Cost Bar */}
                     <div className="flex-1 h-full bg-zinc-800 border border-white/5 rounded-t-[12px] flex flex-col items-center justify-end pb-3">
-                        <span className="text-[16px] font-normal text-gray-500 mb-1">기존 방식</span>
-                        <span className="text-3xl font-bold text-gray-400">High</span>
+                        <span className="text-[16px] font-normal text-gray-500 mb-1">{t('usp.traditional_method')}</span>
+                        <span className="text-3xl font-bold text-gray-400">{t('usp.high')}</span>
                     </div>
 
                     {/* AI Cost Bar - Animated */}
@@ -123,14 +124,14 @@ export const USP = () => {
                         transition={{ duration: 1.5, delay: 0.5, ease: "circOut" }}
                         className="flex-1 bg-[#FF7C2B] flex flex-col items-center justify-end shadow-[0_0_50px_rgba(255,124,43,0.2)] rounded-t-[12px] pb-3"
                     >
-                        <span className="text-[16px] font-normal text-white/80 mb-1">AI STUDIO 48</span>
+                        <span className="text-[16px] font-normal text-white/80 mb-1">{t('usp.company_name')}</span>
                         <motion.span 
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             transition={{ delay: 1.8 }}
                             className="text-3xl font-bold text-white"
                         >
-                            0 KRW
+                            {t('usp.zero_krw')}
                         </motion.span>
                     </motion.div>
                 </div>
@@ -147,9 +148,9 @@ export const USP = () => {
                 <table className="w-full border-collapse flex-1">
                     <thead>
                         <tr className="border-b border-white/10 text-[18px] font-semibold text-gray-500">
-                            <th className="py-6 px-6 text-left border-r border-white/10">구분</th>
-                            <th className="py-6 px-6 text-center border-r border-white/10">일반 에이전시</th>
-                            <th className="py-6 px-6 text-center text-[#FF7C2B] bg-[#FF7C2B]/5">AI STUDIO48</th>
+                            <th className="py-6 px-6 text-left border-r border-white/10">{t('usp.table_header_category')}</th>
+                            <th className="py-6 px-6 text-center border-r border-white/10">{t('usp.table_header_agency')}</th>
+                            <th className="py-6 px-6 text-center text-[#FF7C2B] bg-[#FF7C2B]/5">{t('usp.table_header_us')}</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-white/5">
