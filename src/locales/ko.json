@@ -2,7 +2,8 @@
   "navbar": {
     "features": "Features",
     "portfolio": "Portfolio",
-    "apply": "협업 진행하러 가기"
+    "apply": "협업 진행하러 가기",
+    "download_brochure": "회사소개서"
   },
   "hero": {
     "title1": "영상 제작의 시대가 바뀝니다.",

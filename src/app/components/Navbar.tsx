@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -33,9 +33,29 @@ export const Navbar = () => {
         </div>
         
         <div className="hidden md:flex items-center space-x-8 text-base font-normal text-gray-400">
-          <a href="#features" className="hover:text-white transition-colors">{t('navbar.features')}</a>
-          <a href="#portfolio" className="hover:text-white transition-colors">{t('navbar.portfolio')}</a>
+          <div className="flex items-center space-x-8">
+            <a href="#features" className="hover:text-white transition-colors">{t('navbar.features')}</a>
+            <a href="#portfolio" className="hover:text-white transition-colors">{t('navbar.portfolio')}</a>
+          </div>
           
+          <div className="flex items-center gap-3">
+            <a 
+              href="/company_brochure.pdf" 
+              download 
+              className="flex items-center justify-center gap-2 text-white px-5 h-[42px] rounded-full border border-white/20 hover:bg-white/10 transition-colors font-semibold"
+            >
+              {t('navbar.download_brochure')}
+              <Download className="h-4 w-4" />
+            </a>
+
+            <a 
+              href="#apply" 
+              className="flex items-center justify-center bg-[#FF7C2B] text-white px-5 h-[42px] rounded-full hover:bg-[#E0651A] transition-colors font-semibold shadow-md shadow-orange-900/20"
+            >
+              {t('navbar.apply')}
+            </a>
+          </div>
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white hover:bg-transparent">
@@ -58,10 +78,6 @@ export const Navbar = () => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-
-          <a href="#apply" className="bg-[#FF7C2B] text-white px-6 py-2.5 rounded-full hover:bg-[#E0651A] transition-colors font-semibold shadow-md shadow-orange-900/20">
-            {t('navbar.apply')}
-          </a>
         </div>
 
         <div className="md:hidden flex items-center gap-4">
@@ -105,6 +121,15 @@ export const Navbar = () => {
             <div className="flex flex-col p-6 space-y-4 font-normal text-base text-gray-400">
               <a href="#features" onClick={() => setIsOpen(false)} className="hover:text-white">{t('navbar.features')}</a>
               <a href="#portfolio" onClick={() => setIsOpen(false)} className="hover:text-white">{t('navbar.portfolio')}</a>
+              <a 
+                href="/company_brochure.pdf" 
+                download 
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-2 text-white hover:text-white transition-colors"
+              >
+                {t('navbar.download_brochure')}
+                <Download className="h-4 w-4" />
+              </a>
               <a href="#apply" onClick={() => setIsOpen(false)} className="text-[#FF7C2B] font-semibold">{t('navbar.apply')}</a>
             </div>
           </motion.div>

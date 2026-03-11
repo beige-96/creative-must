@@ -2,7 +2,8 @@
   "navbar": {
     "features": "Features",
     "portfolio": "Portfolio",
-    "apply": "Start Collaboration"
+    "apply": "Start Collaboration",
+    "download_brochure": "Brochure"
   },
   "hero": {
     "title1": "Video production is evolving.",
