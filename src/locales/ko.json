@@ -94,6 +94,19 @@
   },
   "footer": {
     "company_name": "AI STUDIO 48",
+    "company_legal_name": "주식회사 머스트크레이티브",
+    "ceo": "대표자",
+    "ceo_name": "김범철",
+    "phone": "대표번호",
+    "phone_number": "1877-1648",
+    "address": "주소",
+    "address_value": "서울 강남구 논현로135길 48 3층 301호",
+    "business_number": "사업자등록번호",
+    "business_number_value": "872-88-03512",
+    "business_hours": "09:00 ~ 18:00",
+    "off_days": "OFF : 토. 일. 공휴일",
+    "email": "E-mail",
+    "email_value": "bc.kim@must.company",
     "copyright": "© 2026 AI STUDIO 48. All rights reserved."
   },
   "promotion": {

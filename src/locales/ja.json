@@ -93,6 +93,19 @@
   },
   "footer": {
     "company_name": "AI STUDIO 48",
+    "company_legal_name": "株式会社マストクリエイティブ",
+    "ceo": "代表者",
+    "ceo_name": "金範哲",
+    "phone": "代表番号",
+    "phone_number": "1877-1648",
+    "address": "住所",
+    "address_value": "ソウル江南区論硏路135ギル48 3階301号",
+    "business_number": "事業者登録番号",
+    "business_number_value": "872-88-03512",
+    "business_hours": "09:00 ~ 18:00",
+    "off_days": "休業：土・日・祝日",
+    "email": "E-mail",
+    "email_value": "bc.kim@must.company",
     "copyright": "© 2026 AI STUDIO 48. All rights reserved."
   },
   "promotion": {

@@ -93,6 +93,19 @@
   },
   "footer": {
     "company_name": "AI STUDIO 48",
+    "company_legal_name": "株式会社 穆斯特创意",
+    "ceo": "代表",
+    "ceo_name": "金范哲",
+    "phone": "代表号码",
+    "phone_number": "1877-1648",
+    "address": "地址",
+    "address_value": "首尔江南区论砚路135街48号3层301号",
+    "business_number": "营业执照号",
+    "business_number_value": "872-88-03512",
+    "business_hours": "09:00 ~ 18:00",
+    "off_days": "休息：周六、周日、节假日",
+    "email": "电子邮件",
+    "email_value": "bc.kim@must.company",
     "copyright": "© 2026 AI STUDIO 48. 保留所有权利。"
   },
   "promotion": {

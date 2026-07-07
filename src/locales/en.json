@@ -94,6 +94,19 @@
   },
   "footer": {
     "company_name": "AI STUDIO 48",
+    "company_legal_name": "Must Creative Inc.",
+    "ceo": "CEO",
+    "ceo_name": "Beomcheol Kim",
+    "phone": "Phone",
+    "phone_number": "1877-1648",
+    "address": "Address",
+    "address_value": "3F, 301, Nonhyeon-ro 135-gil 48, Gangnam-gu, Seoul",
+    "business_number": "Business Registration No.",
+    "business_number_value": "872-88-03512",
+    "business_hours": "09:00 ~ 18:00",
+    "off_days": "Closed: Sat, Sun, Holidays",
+    "email": "E-mail",
+    "email_value": "bc.kim@must.company",
     "copyright": "© 2026 AI STUDIO 48. All rights reserved."
   },
   "promotion": {
